@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+
+<meta name="title" content="localStorage - Web Storage API">
+<meta name="description" content="API for fast data storage and retrieval in our browser.">
+<meta name="image" content="">
+<meta name="site" content="https://web-storage-apis.github.io/localStorage.html">
+
+<link type="text/css" rel="stylesheet" href="./css/fonts.css" />
+<link type="text/css" rel="stylesheet" href="./css/style.css" />
+
+<title>Web Storage APIs - localStorage Example</title>
+
+<body>
+    <header>
+        <h2>Web Storage APIs<h2>
+    </header>
+    <div class="web-api-cnt">
+
+        <div class="web-api-card">
+            <div class="web-api-card-head">
+                Demo - localStorage
+            </div>
+            <div class="callout">
+                <h4>Info - We are using a Video to demo localStorage.</h4>                
+                <p>
+                    The progress and current time of the video while playing is saved in localStorage via its <b>setItem</b> method as "videoPlaying".
+                    The progress and current time of the video is remembered when the tab is refreshed or when opened in another tab or when the browser is closed and reopened.
+                    The video gets the current time from the localStorage and starts right off from where it stopped the previous time.
+                </p>
+            </div>
+            <div class="web-api-card-body">
+                <div class="video">
+                    <video controls id="video" src="./video.mp4"></video>
+                </div>
+                <div>
+                    <button onclick="restart()">Restart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    const log = console.log
+    videoStorage = localStorage
+
+    if(videoStorage.videoPlaying)
+        video.currentTime = videoStorage.videoPlaying
+
+    // const vid = document.createElement("video")
+
+    video.onplay = function() {
+        videoStorage.setItem("videoPlaying", video.currentTime)
+    }
+
+    video.onpause = function() {
+        videoStorage.setItem("videoPlaying", video.currentTime)
+    }
+
+    video.onstop = function() {
+        videoStorage.clear()
+    }
+
+    video.onplaying = function(ev) {
+        videoStorage.setItem("videoPlaying", video.currentTime)
+    }
+
+    video.onended = function() {
+        videoStorage.clear()
+    }
+
+    window.onbeforeunload = function() {
+        videoStorage.setItem("videoPlaying", video.currentTime)                        
+    }
+
+    document.body.unload = function() {
+        videoStorage.setItem("videoPlaying", video.currentTime)                
+    }
+
+    function restart() {
+        video.currentTime = 0
+        video.play()
+    }
+
+</script>
+
+</html>
