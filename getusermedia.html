@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+
+<meta name="title" content="getMediaUser API">
+<meta name="description" content="API for media devices.">
+<meta name="image" content="">
+<meta name="site" content="">
+
+<link type="text/css" rel="stylesheet" href="./css/fonts.css" />
+<link type="text/css" rel="stylesheet" href="./css/style.css" />
+
+<title>Web APIs getUserMedia Example</title>
+
+<style>
+    
+    .justDiv {
+        position: relative;
+    }
+
+    #canvas {
+        width: 100%;
+        margin: 2px 0px;
+        height: inherit;
+    }
+
+    .video {
+        position: relative;
+    }
+
+    .canvasDiv {
+        position: absolute;
+        z-index: 100;
+        top: 0;
+        left: 0;
+        width: 100%;
+        border: 1px solid green;
+        border-radius: 3px;
+
+        background: white;
+        height: 100%;
+    }
+
+    .close-btn {
+        border-radius: 125%;
+        position: absolute;
+        z-index: 1000;
+        top: 15px;
+        left: 90%;
+        text-align: center;
+
+        cursor: pointer;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+        
+    }
+</style>
+
+<body>
+    <header>
+        <div class="header-bars" onclick="toggleNav('.aside-navbar')"><span class="header-bar fa-bars"></span></div>
+        <div class="title-bar"><h2>Web APIs</h2></div>
+        <div class="navbar">
+            <ul class="navbar-nav">
+                <li class="navbar-nav-item">
+                    <a onclick="toggle('.dropdown')">More APIs</a>
+                    <ul class="dropdown close">
+                        <li class="dropdown-item"><a>History API</a></li>
+                        <li class="dropdown-item"><a>Vibration API</a></li>
+                        <li class="dropdown-item"><a>Fullscreen API</a></li>
+                        <li class="dropdown-item"><a href="./index.html">More ...</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <aside class="aside-sidebar" id="leftAside">
+        <div class="aside-sidebar-header">
+            <h3>Web APIs Menu</h3></div>
+        <ul>
+            <li><a class="aside-sidebar-active" href="./getusermedia.html">getUserMedia API</a></li>
+            <li><a href="./bluetooth.html">Bluetooth API</a></li>            
+            <li><a href="./touch.html">Touch API</a></li>
+            <li><a href="./battery.html">Battery API</a></li>
+            <li><a href="./clipboard.html">Clipboard API</a></li>
+            <li><a href="./audio.html">Web Audio API</a></li>
+            <li><a href="./broadcastchannel.html">Broadcastchannel Messaging API</a></li>
+            <li><a href="./channelmessaging.html">Channel Messaging API</a></li>
+            <li><a href="./fullscreen.html">Fullscreen API</a></li>
+            <li><a href="./history.html">History API</a></li>
+            <li><a href="./vibration.html">Vibration API</a></li>
+            <li><a href="./url.html">URL API</a></li>
+            <li><a href="./speech.html">Web Speech API</a></li>
+            <li><a href="./resizeobserver.html">Resize Observer API</a></li>
+            <li><a href="./touch.html">Touch API</a></li>
+            <li><a href="./pointerlock.html">Pointer Lock API</a></li>
+            <li><a href="./paymentrequest.html">Payment Request API</a></li>
+            <li><a href="./pagevisibility.html">Page Visibility API</a></li>
+        </ul>
+    </aside>
+<div class="container">
+    <div class="web-api-cnt">
+
+        <div class="web-api-card">
+            <div class="web-api-card-head">
+                Demo - getUserMedia
+            </div>
+            <div class="web-api-card-body">
+                <div class="info">
+                    <h4>Info</h4>
+                    <p>This uses the <b>getUserMedia</b> to get your web camera to stream live feed to a <b>video</b> element.</p>
+                    <p>The <b>Capture</b> button will take a snapshot of the <b>video</b> element feed and draw it on a <b>canvas</b> element.</p>
+                </div>
+                <div class="justDiv">
+                    <div>
+                        <video id="video"></video>
+                    </div>
+                    <div>
+                        <button onclick="capture()">Capture</button>
+                    </div>
+                    <div class="close" id="canvasCnt">
+                        <canvas id="canvas"></canvas>
+                        <div>
+                            <button class="close-btn" onclick="closeDiv()">X</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="./js/script.js"></script>
+<script>
+    navigator.mediaDevices.getUserMedia({
+        video: true,
+        audio: true
+    }).then((stream) => {
+        video.srcObject = stream
+        video.play()
+    })
+
+    function capture() {
+        const context = canvas.getContext("2d")
+        context.drawImage(video, 0, 0, canvas.width, canvas.height)
+
+        video.pause()
+
+        canvasCnt.classList.add("canvasDiv")
+        canvasCnt.classList.remove("close")
+    }
+
+    function closeDiv() {
+        canvasCnt.classList.remove("canvasDiv")
+        canvasCnt.classList.add("close")
+
+        video.play()
+    }
+</script>
+
+</html>

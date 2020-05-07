@@ -5,42 +5,171 @@
 <link type="text/css" rel="stylesheet" href="./css/fonts.css" />
 <link type="text/css" rel="stylesheet" href="./css/style.css" />
 
-<meta name="title" content="Web Storage APIs">
-<meta name="description" content="This site displays with examples the formidable Web Storage APIs(localStorage and sessionStorage) in the Web.">
+<meta name="title" content="Web APIs">
+<meta name="description" content="This site displays with examples less-popular but formidable APIs in the Web.">
 <meta name="image" content="">
-<meta name="site" content="https://web-storage-apis.github.io">
+<meta name="site" content="">
 
-<title>Web Storage APIs Example</title>
+<title>Web APIs Example</title>
 
 <body>
     <header>
-        <h2>Web Storage APIs</h2>
+        <h2>Web APIs</h2>
     </header>
     <div class="web-api-cnt">
         <div class="web-api-card">
             <div class="web-api-card-head">
-                <a href="./localStorage.html">localStorage API</a>
+                <a href="./getusermedia.html">getUserMedia API</a>
             </div>
             <div class="web-api-card-body">
-The read-only localStorage property allows you to access a Storage object for the
-Document 's origin; the stored data is saved across browser sessions. localStorage is
-similar to sessionStorage , except that while data stored in localStorage has no
-expiration time, data stored in sessionStorage gets cleared when the page session ends —
-that is, when the page is closed.                
+                This API is used for accessing and controlling the media devices like the camera in our device.
             </div>
         </div>
 
         <div class="web-api-card">
             <div class="web-api-card-head">
-                <a href="./sessionStorage.html">sessionStorage API</a>
+                <a href="./history.html">History API</a>
             </div>
             <div class="web-api-card-body">
-The sessionStorage property accesses a session Storage object for the current origin.
-sessionStorage is similar to localStorage ; the difference is that while data in
-localStorage doesn't expire, data in sessionStorage is cleared when the page session
-ends.                
+                This API is used to manage or manipulate the history of our browser.
             </div>
         </div>
+
+        <div class="web-api-card">
+            <div class="web-api-card-head">
+                <a href="./url.html">URL API</a>
+            </div>
+            <div class="web-api-card-body">
+                This API is used to access and manipulate URLs.
+            </div>
+        </div>
+
+        <div class="web-api-card">
+            <div class="web-api-card-head">
+                <a href="./pagevisibility.html">Page Visibility API</a>
+            </div>
+            <div class="web-api-card-body">
+                This API fires off an `visibilitychange` event when a document becomes visible or hidden.
+            </div>
+        </div>
+
+        <div class="web-api-card">
+            <div class="web-api-card-head">
+                <a href="./touch.html">Touch API</a>
+            </div>
+            <div class="web-api-card-body">
+                This API enables us to register touch events in our webpage. These touch events are fired by mobile devices with touch screens, track ball and stylus.
+            </div>
+        </div>
+
+        <div class="web-api-card">
+            <div class="web-api-card-head">
+                <a href="./clipboard.html">Clipboard API</a>
+            </div>
+            <div class="web-api-card-body">
+                This enables us to copy and read data from the system's clipboard from a webpage and also listen on and responds to clipboard commands such as copy, cut, paste.
+            </div>
+        </div>
+
+        <div class="web-api-card">
+            <div class="web-api-card-head">
+                <a href="./battery.html">Battery API</a>
+            </div>
+            <div class="web-api-card-body">
+                This API provides information of the charge level of the battery in our system, and events to monitor our battery level status.
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="web-api-card">
+            <div class="web-api-card-head">
+                <a href="./audio.html">Web Audio API</a>
+            </div>
+            <div class="web-api-card-body">
+                This API gives us the capabilities to work on a audio stream on the web. This API can be used to add effects, filters to an audio source in the web. 
+            </div>
+        </div>
+
+        <div class="web-api-card">
+            <div class="web-api-card-head">
+                <a href="./fullscreen.html">Fullscreen API</a>
+            </div>
+            <div class="web-api-card-body">
+                This API makes fullscreen-mode of our webpage possible.
+            </div>
+        </div>
+
+        <div class="web-api-card">
+            <div class="web-api-card-head">
+                <a href="./speech.html">Web Speech API</a>
+            </div>
+            <div class="web-api-card-body">
+                This brings power of speech to the Web. This API provides us with the capabilities to add speech synthesis and speech recognition to our web app.
+            </div>
+        </div>
+
+        <div class="web-api-card">
+            <div class="web-api-card-head">
+                <a href="./bluetooth.html">Bluetooth API</a>
+            </div>
+            <div class="web-api-card-body">
+                This API let's us access the Bluetooth Low Energy device in our phone.
+            </div>
+        </div>
+        <div class="web-api-card">
+            <div class="web-api-card-head">
+                <a href="./channelmessaging.html">Channel Messaging API</a>
+            </div>
+            <div class="web-api-card-body">
+                This API allows the two scripts in different browser contexts to communicate and pass messages to each other in a two-way channel.
+            </div>
+        </div>
+        <div class="web-api-card">
+            <div class="web-api-card-head">
+                <a href="./vibration.html">Vibration API</a>
+            </div>
+            <div class="web-api-card-body">
+                This API makes our device shake or vibrate as a means of notification or physical feedback to a new data or info we should respond to.
+            </div>
+        </div>
+
+        <div class="web-api-card">
+            <div class="web-api-card-head">
+                <a href="./broadcastchannel.html">Broadcast Channel API</a>
+            </div>
+            <div class="web-api-card-body">
+                This API allows communcation of messages or data from different browsing contexts on the same origin.
+            </div>
+        </div>
+
+        <div class="web-api-card">
+            <div class="web-api-card-head">
+                <a href="./paymentrequest.html">Payment Request API</a>
+            </div>
+            <div class="web-api-card-body">
+                This API provides a way of selecting a payment method for goods and services to a payment gateway.
+            </div>
+        </div>
+
+        <div class="web-api-card">
+            <div class="web-api-card-head">
+                <a href="./resizeobserver.html">Resize Observer API</a>
+            </div>
+            <div class="web-api-card-body">
+                This API provides a way an observer is notified if an element it is registered on is re-sized in anyway.
+            </div>
+        </div>
+
+        <div class="web-api-card">
+            <div class="web-api-card-head">
+                <a href="./pointerlock.html">Pointer Lock API</a>
+            </div>
+            <div class="web-api-card-body">
+                This API gives an unlimiited access to the mouse inputs, co-ordinates, actions, movement without restriction.
+            </div>
+        </div>
+
 
     </div>
 </body>

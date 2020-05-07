@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+
+<meta name="title" content="Editor">
+<meta name="description" content="API for text encoding and decoding.">
+<meta name="image" content="">
+<meta name="site" content="">
+
+
+<title>Editor</title>
+
+<style>
+    * {
+        outline: none;
+    }
+
+    .close {
+        display: none !important;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+    }
+
+    p {
+        margin: 0;
+        margin-top: 10px;
+        padding: 0;
+    }
+
+    .main {
+        max-width: 740px;
+        padding-left: 20px;
+        padding-right: 20px;
+        width: 100%;
+
+        font-size: 42px;
+    }
+
+    .desc {
+        color: #b3b3b1;
+    }
+
+    .body {
+        font-size: 21px;
+    }
+
+    .toolbar {
+        display: inline-block;
+        background: black;
+        color: white;
+        
+        height: 34px;
+        padding: 5px;
+        border-radius: 3px;
+        
+        position: absolute;
+        /*visibility: hidden;
+        display: none;*/
+        z-index: 500;
+        -webkit-transition: none;
+        transition: none;
+        top: 0;
+        left: 0;
+    }
+
+    .toolbar::before {
+        content: "";
+
+        top: -87%;
+        position: relative;
+        left: 50%;
+
+        width: 0;
+        height: 0;
+        display: inline-block;
+
+        border-bottom: 5px solid black;
+        border-top: 5px solid transparent;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+    }
+
+    .toolbar-item {
+        display: inline-block;
+        
+        height: auto;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .toolbar-item:hover {
+        color: gray;
+    }
+
+    .loading {
+        position: absolute;
+
+        height: 2px;
+        width: 100%;
+        background: limegreen;
+
+        top: 0;
+        left: 0;
+        z-index: 1000;
+    }
+
+</style>
+
+<body>
+    <div class="loading"></div>
+    <div class="main">
+        <div class="title" id="title" contenteditable="true">
+            <p class="desc desc-title">
+                <span>Title</span>
+                <br>
+            </p>
+        </div>
+        <div class="body" id="body" contenteditable="true">
+            <p class="desc desc-body">
+                <span>Tell your story...</span>
+                <br>
+            </p>
+        </div>
+    </div>
+
+    <div class="toolbar" id="toolBar">
+        <div class="toolbar-item" onclick="return toolBarClick('bold', event)">B</div>
+        <div class="toolbar-item" onclick="return toolBarClick('italic')">I</div>
+        <div class="toolbar-item" onclick="return toolBarClick('underline')">U</div>
+        <div class="toolbar-item" onclick="return toolBarClick('texthead')">T</div>
+        <div class="toolbar-item" onclick="return toolBarClick('quote')">"</div>
+    </div>
+</body>
+<script>
+    const log = console.log
+    const descTitle = document.querySelector(".desc-title")
+    const descBody = document.querySelector(".desc-body")
+
+    title.addEventListener("keydown", (evt) => {
+        // log(evt)
+        if(!descTitle.classList.contains("close")) {
+            evt.preventDefault()
+            descTitle.classList.add("close")
+            title.innerHTML += `
+                <p class="">
+                    <span>${evt.key}</span>
+                    <br>
+                </p>        
+            `
+            evt.stopPropagation()
+        }
+
+    })
+
+    body.addEventListener("keydown", (evt) => {
+        // log(evt)
+        if(!descBody.classList.contains("close")) {
+            evt.preventDefault()
+            descBody.classList.add("close")
+            body.innerHTML += `
+                <p class="">
+                    <span>${evt.key}</span>
+                    <br>
+                </p>        
+            `
+            evt.stopPropagation()
+        }
+    })
+
+    body.addEventListener("mouseup", (evt) => {
+        toolBar.style.top = (evt.pageY + 14) + "px";
+        toolBar.style.left = (evt.pageX - 91.925) + "px";
+    })
+
+    function toolBarClick(t, event) {
+        event.preventDefault()
+        const res = document.execCommand("bold", false, "bold")
+        log(res)
+        const anchorNode = document.getSelection().anchorNode;
+        log(anchorNode)
+        event.stopPropagation()
+    }
+
+</script>
+
+</html>

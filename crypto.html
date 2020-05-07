@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+
+<meta name="title" content="Crypto API">
+<meta name="description" content="API for web-based cryptographic operations.">
+<meta name="image" content="">
+<meta name="site" content="">
+
+<link type="text/css" rel="stylesheet" href="./css/fonts.css" />
+<link type="text/css" rel="stylesheet" href="./css/style.css" />
+
+<title>Web APIs Crypto Example</title>
+
+<style>
+    #canvas {
+        border: 1px solid green;
+        border-radius: 3px;
+        width: 100%;        
+    }
+</style>
+
+<body>
+    <header>
+        <h2>Web APIs</h2>
+        <div class="more-apis">
+            <ul>
+                <li>
+                    <div>
+                        <a onclick="toggle('.dropdown')">More APIs</a>
+                        <ul class="dropdown close">
+                            <li><a>Battery API</a></li>
+                            <li><a>Vibration API</a></li>
+                            <li><a>Fullscreen API</a></li>
+                            <li><a href="./index.html">More ...</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="web-api-cnt">
+
+        <div class="web-api-card">
+            <div class="web-api-card-head">
+                Demo - Crypto (RSA-OEAP)
+            </div>
+            <div class="web-api-card-body">
+                <div class="info">
+                    <h4>Info</h4>
+                    <p>The text you type in the input box will be encrypted with the RSA-OEAP encryption algortihm.</p>
+                    <p>The <b>Decrypt</b> button will decrypt the encrypted data.</p>
+                </div>
+                <div>
+                    <div>
+                        <input id="rsaOeap" type="text" placeholder="(RSA-OEAP) Type word to encrypt..." />
+                        <div id="rsaOeapRes"></div>
+                    </div>
+                    <div>
+                        <button onclick="rsaOeapEncrypt()">Encrypt (RSA-OEAP</button>
+                    </div>
+                    <div id="rsaOeapResDecrypt"></div>
+                    <div>
+                        <button onclick="rsaOeapDecrypt()">Decrypt (RSA-OEAP</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./js/script.js"></script>
+<script>
+    const log = console.log
+
+    function ab2str(b) {
+        return String.fromCharCode.apply(null, new Uint16Array(b))
+    }
+
+    let oeapKey
+    let cipherText
+
+    function rsaOeapEncrypt() {
+        const dataToEncrypt = rsaOeap.value
+        const en = new TextEncoder()
+        const data = en.encode(dataToEncrypt)
+
+        crypto.subtle.generateKey(
+            {
+                name: "RSA-OAEP",
+                modulusLength: 2048,
+                publicExponent: new Uint8Array([1, 0, 1]),
+                hash: "SHA-256"
+            },
+            true,
+            ["encrypt", "decrypt"]
+        ).then( key => {
+            oeapKey = key
+            crypto.subtle.encrypt(
+                {
+                    name: "RSA-OAEP"
+                },
+                oeapKey.publicKey,
+                data
+            ).then(cipherTxt => {
+                cipherText = cipherTxt
+                log(cipherText)
+                rsaOeapRes.innerHTML = cipherTxt
+            })
+        })
+
+    }
+
+    function rsaOeapDecrypt() {
+        crypto.subtle.decrypt(
+            {
+                name: "RSA-OAEP"
+            },
+            oeapKey.privateKey,
+            cipherText
+        ).then(decryptRes => {
+            log(decryptRes)
+            rsaOeapResDecrypt.innerHTML = decryptRes
+        })        
+    }
+</script>
+
+</html>

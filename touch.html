@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+
+<meta name="title" content="Touch API">
+<meta name="description" content="API for mobile device touch screens.">
+<meta name="image" content="">
+<meta name="site" content="">
+
+<link type="text/css" rel="stylesheet" href="./css/fonts.css" />
+<link type="text/css" rel="stylesheet" href="./css/style.css" />
+
+<title>Web APIs Touch Example</title>
+
+<style>
+    #canvas {
+        border: 1px solid green;
+        border-radius: 3px;
+        width: 100%;        
+    }
+</style>
+
+<body>
+    <header>
+        <div class="header-bars" onclick="toggleNav('.aside-navbar')"><span class="header-bar fa-bars"></span></div>
+        <div class="title-bar"><h2>Web APIs</h2></div>
+        <div class="navbar">
+            <ul class="navbar-nav">
+                <li class="navbar-nav-item">
+                    <a onclick="toggle('.dropdown')">More APIs</a>
+                    <ul class="dropdown close">
+                        <li class="dropdown-item"><a>History API</a></li>
+                        <li class="dropdown-item"><a>Vibration API</a></li>
+                        <li class="dropdown-item"><a>Fullscreen API</a></li>
+                        <li class="dropdown-item"><a href="./index.html">More ...</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <aside class="aside-sidebar" id="leftAside">
+        <div class="aside-sidebar-header">
+            <h3>Web APIs Menu</h3></div>
+        <ul>
+            <li><a href="./bluetooth.html">Bluetooth API</a></li>            
+            <li><a class="aside-sidebar-active" href="./touch.html">Touch API</a></li>
+            <li><a href="./battery.html">Battery API</a></li>
+            <li><a href="./clipboard.html">Clipboard API</a></li>
+            <li><a href="./audio.html">Web Audio API</a></li>
+            <li><a href="./broadcastchannel.html">Broadcastchannel Messaging API</a></li>
+            <li><a href="./channelmessaging.html">Channel Messaging API</a></li>
+            <li><a href="./fullscreen.html">Fullscreen API</a></li>
+            <li><a href="./history.html">History API</a></li>
+            <li><a href="./vibration.html">Vibration API</a></li>
+            <li><a href="./url.html">URL API</a></li>
+            <li><a href="./speech.html">Web Speech API</a></li>
+            <li><a href="./resizeobserver.html">Resize Observer API</a></li>
+            <li><a href="./pointerlock.html">Pointer Lock API</a></li>
+            <li><a href="./paymentrequest.html">Payment Request API</a></li>
+            <li><a href="./pagevisibility.html">Page Visibility API</a></li>
+        </ul>
+    </aside>
+<div class="container">
+    <div class="web-api-cnt">
+
+        <div class="web-api-card">
+            <div class="web-api-card-head">
+                Demo - Touch
+            </div>
+            <div class="web-api-card-body">
+                <div class="info">
+                    <h4>Info</h4>
+                    <p>The canvas element will respond to touch movement across touchscreen phones and trackballs to draw the finger movement.</p>
+                </div>
+                <div>
+                    <div>
+                        <canvas id="canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="./js/script.js"></script>
+<script>
+    canvas.addEventListener("touchstart", (evt)=> {
+        const ctx = canvas.getContext("2d")
+        const { touches } = evt
+        for (var index = 0; index < touches.length; index++) {
+            var touch = touches[index];
+            const { pageX, pageY } = touch
+            /*ctx.beginPath()
+            ctx.moveTo(pageX, pageY)*/
+            console.log(touch)
+            console.log("touchstart => pageX:" + pageX, "pageY:" + pageY)
+        }
+    })
+
+    canvas.addEventListener("touchmove", (evt)=> {
+        const ctx = canvas.getContext("2d")
+        const { touches } = evt
+        for (var index = 0; index < touches.length; index++) {
+            var touch = touches[index];
+            const { pageX, pageY } = touch
+            console.log("touchmove => pageX:" + pageX, "pageY:" + pageY)
+
+            /*ctx.beginPath()
+            ctx.moveTo(pageX, pageY)*/
+            /*ctx.beginPath()
+            ctx.moveTo(0, 0)
+
+            ctx.lineTo(pageX, pageY)
+            ctx.lineWidth = 4;
+            ctx.strokeStyle = "#101010"
+            ctx.stroke()*/
+        }
+    })
+
+</script>
+
+</html>

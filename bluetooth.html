@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+
+<meta name="title" content="Bluetooth API">
+<meta name="description" content="API for Bluetooth communication and interaction.">
+<meta name="image" content="">
+<meta name="site" content="">
+
+<link type="text/css" rel="stylesheet" href="./css/fonts.css" />
+<link type="text/css" rel="stylesheet" href="./css/style.css" />
+
+<title>Web APIs Bluetooth Example</title>
+
+<style>
+</style>
+
+<body>
+    <header>
+        <div class="header-bars" onclick="toggleNav('.aside-navbar')"><span class="header-bar fa-bars"></span></div>
+        <div class="title-bar"><h2>Web APIs</h2></div>
+        <div class="navbar">
+            <ul class="navbar-nav">
+                <li class="navbar-nav-item">
+                    <a onclick="toggle('.dropdown')">More APIs</a>
+                    <ul class="dropdown close">
+                        <li class="dropdown-item"><a>History API</a></li>
+                        <li class="dropdown-item"><a>Vibration API</a></li>
+                        <li class="dropdown-item"><a>Fullscreen API</a></li>
+                        <li class="dropdown-item"><a href="./index.html">More ...</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <aside class="aside-sidebar" id="leftAside">
+        <div class="aside-sidebar-header">
+            <h3>Web APIs Menu</h3></div>
+        <ul>
+            <li><a class="aside-sidebar-active" href="./bluetooth.html">Bluetooth API</a></li>            
+            <li><a href="./touch.html">Touch API</a></li>
+            <li><a href="./battery.html">Battery API</a></li>
+            <li><a href="./clipboard.html">Clipboard API</a></li>
+            <li><a href="./audio.html">Web Audio API</a></li>
+            <li><a href="./broadcastchannel.html">Broadcastchannel Messaging API</a></li>
+            <li><a href="./channelmessaging.html">Channel Messaging API</a></li>
+        </ul>
+    </aside>
+    <div class="container">
+    <div class="web-api-cnt">
+
+        <div class="web-api-card">
+            <div class="web-api-card-head">
+                Demo - Bluetooth
+            </div>
+            <div class="web-api-card-body">
+                <div id="error" class="close"></div>
+                <div>
+                    <div>Device Name: <span id="dname"></span></div>
+                    <div>Device ID: <span id="did"></span></div>
+                    <div>Device Connected: <span id="dconnected"></span></div>
+                </div>
+
+                <div>
+                    <button onclick="bluetoothAction()">Get BLE Device</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    </div>
+</body>
+<script src="./js/script.js"></script>
+
+<script>
+    function bluetoothAction(){
+        if(navigator.bluetooth) {
+            navigator.bluetooth.requestDevice({
+                acceptAllDevices: true
+            }).then(device => {            
+                dname.innerHTML = device.name
+                did.innerHTML = device.id
+                dconnected.innerHTML = device.connected
+            }).catch(err => {
+                error.innerHTML = "Oh my!! Something went wrong."
+                error.classList.remove("close")
+            })
+        } else {
+            error.innerHTML = "Bluetooth is not supported."            
+            error.classList.remove("close")
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+
+<meta name="title" content="History API">
+<meta name="description" content="API for navigating through history session.">
+<meta name="image" content="">
+<meta name="site" content="">
+
+<link type="text/css" rel="stylesheet" href="./css/fonts.css" />
+<link type="text/css" rel="stylesheet" href="./css/style.css" />
+
+<title>Web APIs History Example</title>
+
+<style>
+</style>
+
+<body>
+    <header>
+        <div class="header-bars" onclick="toggleNav('.aside-navbar')"><span class="header-bar fa-bars"></span></div>
+        <div class="title-bar"><h2>Web APIs</h2></div>
+        <div class="navbar">
+            <ul class="navbar-nav">
+                <li class="navbar-nav-item">
+                    <a onclick="toggle('.dropdown')">More APIs</a>
+                    <ul class="dropdown close">
+                        <li class="dropdown-item"><a>History API</a></li>
+                        <li class="dropdown-item"><a>Vibration API</a></li>
+                        <li class="dropdown-item"><a>Fullscreen API</a></li>
+                        <li class="dropdown-item"><a href="./index.html">More ...</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <aside class="aside-sidebar" id="leftAside">
+        <div class="aside-sidebar-header">
+            <h3>Web APIs Menu</h3></div>
+        <ul>
+            <li><a href="./bluetooth.html">Bluetooth API</a></li>            
+            <li><a href="./touch.html">Touch API</a></li>
+            <li><a href="./battery.html">Battery API</a></li>
+            <li><a href="./clipboard.html">Clipboard API</a></li>
+            <li><a href="./audio.html">Web Audio API</a></li>
+            <li><a href="./broadcastchannel.html">Broadcastchannel Messaging API</a></li>
+            <li><a href="./channelmessaging.html">Channel Messaging API</a></li>
+            <li><a href="./fullscreen.html">Fullscreen API</a></li>
+            <li><a class="aside-sidebar-active" href="./history.html">History API</a></li>
+            <li><a href="./vibration.html">Vibration API</a></li>
+            <li><a href="./url.html">URL API</a></li>
+            <li><a href="./speech.html">Web Speech API</a></li>
+            <li><a href="./resizeobserver.html">Resize Observer API</a></li>
+            <li><a href="./touch.html">Touch API</a></li>
+            <li><a href="./pointerlock.html">Pointer Lock API</a></li>
+            <li><a href="./paymentrequest.html">Payment Request API</a></li>
+            <li><a href="./pagevisibility.html">Page Visibility API</a></li>
+        </ul>
+    </aside>
+<div class="container">
+    <div class="web-api-cnt">
+
+        <div class="web-api-card">
+            <div class="web-api-card-head">
+                Demo - History
+            </div>
+            <div class="web-api-card-body">
+                <div class="info">
+                    <h4>Info</h4>
+                    <p>The <b>"pushState"</b> button pushes a new URL on the tab.</p>
+                    <p>The <b>"go"</b> button will navigate to the point you typed.</p>
+                    <p>The <b>"back"</b> button will take you to the previous point.</p>
+                    <p>The <b>"forward"</b> button will take you forward in the history stack.</p>
+                </div>
+                <!--<div>
+                    <iframe id="iframe" src="./iframe.content.html"></iframe>
+                </div>-->
+                <div>
+                    <div id="hist">
+
+                    </div>
+                    <style>
+                        #hist {
+                            font-family: raleway-light;
+                        }
+                    </style>
+                    <div class="divider"></div>
+                    <div>
+                        <div class="input-bg">
+                            <input id="urlToPush" type="text" placeholder="Type in the URL to push" />
+                        </div>
+                        <button onclick="pushState()">pushState</button>
+                    </div>
+                    <div class="divider"></div>
+                    <div>
+                        <input id="pointToMove" type="number" placeholder="Type in point in history stack to move to" />
+                        <button onclick="go()">go</button>
+                    </div>
+                    <div class="divider"></div>
+                    <button onclick="back()">back</button>
+                    <button onclick="forward()">forward</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="./js/script.js"></script>
+<script>
+    let stateId = 1
+
+    function pushState() {
+        const _urlToPush = urlToPush.value
+        history.pushState( {page: ++stateId, toString: ()=> "page:"+this.page }, _urlToPush, "?"+_urlToPush)
+    }
+
+    function go() {
+        const point = pointToMove.value
+        history.go(point)
+        return;
+        if(point)
+            history.go(point)
+        else
+            history.go()
+    }
+
+    function back() {
+        history.back()
+    }
+
+    function forward() {
+        history.forward()
+    }
+
+    function renderHistory() {
+        hist.innerHTML = "History State: " + history.state       
+    }
+
+    renderHistory()
+    document.addEventListener("click", () => renderHistory())
+</script>
+
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+
+
+<title>Dropdown Example</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+        white-space: nowrap;
+    }
+
+    a {
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    :visited {
+        color: white;
+    }
+
+    .close {
+        display: none !important;
+    }
+
+    body {
+        margin: 0;
+        background: #e5e6e6;
+    }
+
+    header {
+        min-height: 48px;
+        background: #222d32;
+        height: 48px;
+    }
+
+    .ham-bar {
+        display: block;
+        float: left;
+        height: inherit;
+        padding: 15px 15px;
+        color: white;
+    }
+
+    .ham-bar::before {
+        content: "\2630";
+    }
+
+    nav {
+        min-height: 48px;
+    }
+
+    .title-bar {
+        float: left;
+        height: 48px;        
+        padding: 15px 15px;
+        font-size: 27px;
+        line-height: 0.6;
+
+        color: white;
+    }
+
+    .menu {
+        float: right;
+        padding-right: 34px;
+    }
+
+    .menubar {
+        list-style: none;
+        float:left;
+        margin: 0;
+    }
+
+    .menu-item {
+        float: left;
+        position: relative;
+    }
+
+    .menu-item > a {
+        padding: 12px;
+        min-height: 48px;
+        display: block;
+        color: white;
+    }
+
+    .menu-item > a:hover {
+        background: rgba(0, 0, 0, 0.1);
+    }
+
+    .menu-item > a .img {
+        float: left;
+
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        margin-right: 10px;
+        margin-top: -2px;
+
+        background: brown;
+    }
+
+    .dropdown {
+        position: absolute;
+        z-index: 1000;
+        background: white;
+        color: black;
+        list-style: none;
+        margin: 0;
+        padding: 5px 0;
+        border-color: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+        top: 100%;
+        left: 0;        
+        width: 100%;
+    }
+
+    .dropdown li a {
+        padding: 5px 20px;
+        font-size: 20px;
+        display: block;
+        color: black;        
+    }
+
+    .dropdown li a:active {
+        background: #ddd;
+    }
+
+    .dropdown li a:hover {
+        background: #ddd;
+    }
+
+    button {
+        padding: 5px 15px;
+        border: 1px solid transparent;
+        text-align: center;
+        border-radius: 4px;
+        background: blue;
+        outline: 0 none;
+        text-decoration: none;
+        position: relative;
+        color: white;
+        border-color: #00006a;
+        cursor: pointer;
+        outline: none;
+        text-decoration: none;
+    }
+
+    button:active {
+        background: #00006a;
+    }
+
+    .container {
+        margin-left: 15px;
+        margin-right: 15px;
+
+        padding-top: 15px;
+    }
+
+    @media(max-width: 442px) {
+        .menu {
+            background: #222d32;
+            color: white;
+            float: right;
+            width: 100%;
+        }
+
+        .menubar {
+            float: right;
+        }
+    }
+
+
+</style>
+
+<body>
+    <header>
+        <a class="ham-bar"></a>
+        <nav>
+            <a class="title-bar">Dropdown Example</a>
+            <div class="menu">
+                <ul class="menubar">
+                    <li class="menu-item">
+                        <a onclick="toggle('.dropdown-1')">
+                            <img class="img" />
+                            Chidume N</a>
+                        <ul class="dropdown dropdown-1 close">
+                            <li><a>Profile</a></li>
+                            <li><a>Settings</a></li>
+                            <li><a>Friends</a></li>
+                            <li><a>Log Out</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a onclick="toggle('.dropdown-2')">Dropdown</a>
+                        <ul class="dropdown dropdown-2 close">
+                            <li><a>Create</a></li>
+                            <li><a>Delete</a></li>
+                            <li><a>Mail</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <button onclick="toggle('.dropdown-3')">
+            Dropdown Button
+            <ul class="dropdown dropdown-3 close">
+                <li><a>Create</a></li>
+                <li><a>Delete</a></li>
+                <li><a>Mail</a></li>
+            </ul>
+        </button>
+    </div>
+</body>
+<script>
+    function toggle(className) {
+        document.querySelector(className).classList.toggle("close")
+    }
+</script>
+
+</html>

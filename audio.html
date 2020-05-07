@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+
+<meta name="title" content="Web Audio API">
+<meta name="description" content="API for synthesizing and addding effects to audio.">
+<meta name="image" content="">
+<meta name="site" content="">
+
+<link type="text/css" rel="stylesheet" href="./css/fonts.css" />
+<link type="text/css" rel="stylesheet" href="./css/style.css" />
+
+
+<title>Web APIs Audio Example</title>
+
+<style>
+    audio {
+        width:100%;
+        height:inherit;
+    }
+
+</style>
+
+<body>
+    <header>
+        <div class="header-bars" onclick="toggleNav('.aside-navbar')"><span class="header-bar fa-bars"></span></div>
+        <div class="title-bar"><h2>Web APIs</h2></div>
+        <div class="navbar">
+            <ul class="navbar-nav">
+                <li class="navbar-nav-item">
+                    <a onclick="toggle('.dropdown')">More APIs</a>
+                    <ul class="dropdown close">
+                        <li class="dropdown-item"><a>History API</a></li>
+                        <li class="dropdown-item"><a>Vibration API</a></li>
+                        <li class="dropdown-item"><a>Fullscreen API</a></li>
+                        <li class="dropdown-item"><a href="./index.html">More ...</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <aside class="aside-sidebar" id="leftAside">
+        <div class="aside-sidebar-header">
+            <h3>Web APIs Menu</h3></div>
+        <ul>
+            <li><a href="./bluetooth.html">Bluetooth API</a></li>            
+            <li><a href="./touch.html">Touch API</a></li>
+            <li><a href="./battery.html">Battery API</a></li>
+            <li><a href="./clipboard.html">Clipboard API</a></li>
+            <li><a class="aside-sidebar-active" href="./audio.html">Web Audio API</a></li>
+            <li><a href="./broadcastchannel.html">Broadcastchannel Messaging API</a></li>
+            <li><a href="./channelmessaging.html">Channel Messaging API</a></li>
+        </ul>
+    </aside>
+<div class="container">
+    <div class="web-api-cnt">
+
+        <div class="web-api-card">
+            <div class="web-api-card-head">
+                Demo - Audio
+            </div>
+            <div class="web-api-card-body">
+                <div id="error" class="close"></div>
+                <div>
+                    <audio controls src="./audio.mp3" id="audio"></audio>
+                </div>
+
+                <div>
+                    <button onclick="audioFromAudioFile.init()">Init</button>
+                    <button onclick="audioFromAudioFile.play()">Play</button>
+                    <button onclick="audioFromAudioFile.pause()">Pause</button>
+                    <button onclick="audioFromAudioFile.stop()">Stop</button>
+                </div>
+                <div>
+
+                    <span>Vol: <input onchange="audioFromAudioFile.changeVolume()" type="range" id="vol" min="1" max="2" step="0.01" value="1" /></span>
+                    <span>Pan: <input onchange="audioFromAudioFile.changePan()" type="range" id="panner" min="-1" max="1" step="0.01" value="0" /></span>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+
+<script src="./js/script.js"></script>
+<script>
+    const l = console.log
+    let audioFromAudioFile = (function() {
+        var audioContext
+        var volNode
+        var pannerNode
+        var mediaSource
+
+        function init() {
+            l("Init")
+        try {
+                audioContext = new AudioContext()        
+                mediaSource = audioContext.createMediaElementSource(audio)
+                volNode = audioContext.createGain()
+                volNode.gain.value = 1
+                pannerNode = new StereoPannerNode(audioContext, { pan:0 })
+
+                mediaSource.connect(volNode).connect(pannerNode).connect(audioContext.destination)
+            }
+            catch(e) {
+                error.innerHTML = "The Web Audio API is not supported in this device."
+                error.classList.remove("close")
+            }
+        }
+
+        function play() {
+            audio.play()            
+        }
+
+        function pause() {
+            audio.pause()
+        }
+
+        function stop() {
+            audio.stop()            
+        }
+
+        function changeVolume() {
+            volNode.gain.value = this.value
+            l("Vol Range:",this.value)
+        }
+
+        function changePan() {
+            pannerNode.gain.value = this.value
+            l("Pan Range:",this.value)
+        }
+
+        return {
+            init,
+            play,
+            pause,
+            stop,
+            changePan,
+            changeVolume
+        }
+    })()
+
+</script>
+
+</html>

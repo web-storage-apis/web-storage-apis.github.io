@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+
+<meta name="title" content="">
+<meta name="description" content="">
+<meta name="image" content="">
+<meta name="site" content="">
+
+<title>Spinners</title>
+
+<style>
+    .circle {
+        height: 70px;
+        width: 70px;
+        position: relative;
+    }
+
+    .circle-ring {
+        position: absolute;
+        border-radius: 50%;
+        height: 48px;
+        width: 48px;
+        border: 8px solid #9c0000;
+        border-color: #7c0606 transparent transparent transparent;
+        background: transparent;    
+
+        animation-name: circleSpin-stop;
+        animation-duration: 1.0s;
+        animation-delay: 1.2s;
+        animation-iteration-count: infinite;
+    }
+
+    @keyframes circleSpin {
+        0% {
+            transform: rotate(0);
+            border-color: #7c0606 transparent transparent transparent;
+        }
+
+        50% {
+            transform: rotate(50deg);
+            border-color: green transparent transparent transparent;
+        }
+
+        100% {
+            transform: rotate(360deg);
+            border-color: blueviolet transparent transparent transparent;
+        }
+    }
+
+    .line {
+        height: 3px;
+        width: 100px;
+    }
+
+    .line div:nth-child(1) {
+        background: blue;       
+        height: inherit; 
+        width: 20px;
+        position: relative;
+
+        animation-name: lineSpin;
+        animation-duration: 1.0s;
+        animation-delay: 1.2s;
+        animation-iteration-count: infinite;
+    }
+
+    @keyframes lineSpin {
+        0% {
+            left: 0%;
+        }
+
+        50% {
+            left: 50%;
+        }
+
+        100% {
+            left: 100%;
+        }
+    }
+</style>
+
+<body>
+
+<div class="circle">
+    <div class="circle-ring"></div>
+</div>
+
+<div class="line">
+    <div></div>
+</div>
+
+</body>
+
+<script>
+</script>
+</html>

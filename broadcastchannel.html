@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+
+<meta name="title" content="Broadcast Channel API">
+<meta name="description" content="API for communication between different browser contexts in the same origin.">
+<meta name="image" content="">
+<meta name="site" content="">
+
+<link type="text/css" rel="stylesheet" href="./css/fonts.css" />
+<link type="text/css" rel="stylesheet" href="./css/style.css" />
+
+<title>Web APIs Broadcast Channel Example</title>
+
+<style>
+
+    .chatArea {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    #displayMsg {
+        overflow-x: auto;
+        height: 236px;
+    }
+
+    .chat-msg {
+        /*height: 40px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;*/
+
+        width:70%;
+        margin: 6px;
+        padding: 2px;
+        padding-left: 4px;
+        /*border-left-color:green;
+        border-left-style:solid;*/
+
+        background-color: orangered;
+        border-radius: 2px;
+        position: relative;
+        color: white;
+
+        font-size: 16px;
+    }
+
+    .chat-msg::before {
+        content: ' ';
+        border: solid transparent;
+        top: 18%;
+        right:100%;
+        position: absolute;
+
+        height:0;
+        width:0;
+        pointer-events: none;
+        border-bottom: 5px  solid transparent;
+        border-right: 5px solid orangered;
+        border-top:5px solid transparent;
+    }
+
+    .page-info {
+        font-size:14px;
+        border-bottom-color: green;
+        border-bottom-style: solid;
+    }
+
+</style>
+
+<body>
+    <header>
+        <div class="header-bars" onclick="toggleNav('.aside-navbar')"><span class="header-bar fa-bars"></span></div>
+        <div class="title-bar"><h2>Web APIs</h2></div>
+        <div class="navbar">
+            <ul class="navbar-nav">
+                <li class="navbar-nav-item">
+                    <a onclick="toggle('.dropdown')">More APIs</a>
+                    <ul class="dropdown close">
+                        <li class="dropdown-item"><a>History API</a></li>
+                        <li class="dropdown-item"><a>Vibration API</a></li>
+                        <li class="dropdown-item"><a>Fullscreen API</a></li>
+                        <li class="dropdown-item"><a href="./index.html">More ...</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <aside class="aside-sidebar" id="leftAside">
+        <div class="aside-sidebar-header">
+            <h3>Web APIs Menu</h3></div>
+        <ul>
+            <li><a href="./bluetooth.html">Bluetooth API</a></li>            
+            <li><a href="./touch.html">Touch API</a></li>
+            <li><a href="./battery.html">Battery API</a></li>
+            <li><a href="./clipboard.html">Clipboard API</a></li>
+            <li><a href="./audio.html">Web Audio API</a></li>
+            <li><a class="aside-sidebar-active" href="./broadcastchannel.html">Broadcastchannel Messaging API</a></li>
+            <li><a href="./channelmessaging.html">Channel Messaging API</a></li>
+        </ul>
+    </aside>
+<div class="container">
+    <div class="web-api-cnt">
+
+        <div class="web-api-card">
+            <div class="web-api-card-head">
+                Demo - BroadcastChannel
+            </div>
+            <div class="web-api-card-body">
+                <div class="page-info">Open this page in another <i>tab</i>, <i>window</i> or <i>iframe</i> to chat with them.</div>
+                <div id="error" class="close"></div>
+                <div id="displayMsg" style="font-size:19px;text-align:left;">
+                </div>
+                <div class="chatArea">
+                    <input id="input" type="text" placeholder="Type your message" />
+                    <button onclick="sendMsg()">Send Msg to Channel</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+<script src="./js/script.js"></script>
+
+<script>
+    const l = console.log;
+    try {
+        var politicsChannel = new BroadcastChannel("politics")
+        politicsChannel.onmessage = onMessage
+        var userId = Date.now()
+    } catch(e) {
+        error.innerHTML = "BroadcastChannel API not supported in this device."
+        error.classList.remove("close")
+    }
+
+    input.addEventListener("keydown", (e) => {
+        if(e.keyCode === 13 && e.target.value.trim().length > 0) {
+            sendMsg()            
+        }
+    })
+
+    function onMessage(e) {     
+        const {msg,id}=e.data   
+        const newHTML = "<div class='chat-msg'><span><i>"+id+"</i>: "+msg+"</span></div>"
+        displayMsg.innerHTML = displayMsg.innerHTML + newHTML
+        displayMsg.scrollTop = displayMsg.scrollHeight
+    }
+
+    function sendMsg() {
+        politicsChannel.postMessage({msg:input.value,id:userId})
+
+        const newHTML = "<div class='chat-msg'><span><i>Me</i>: "+input.value+"</span></div>"
+        displayMsg.innerHTML = displayMsg.innerHTML + newHTML
+
+        input.value = ""
+
+        displayMsg.scrollTop = displayMsg.scrollHeight
+    }
+        
+
+</script>
+
+</html>
